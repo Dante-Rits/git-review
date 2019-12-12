@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Sample</title>
+</head>
+<body>
+  SampleKey :
+    <input type="text" id="valueInput" placeholder="Message">
+    <input type="button" id="updateButton" value="更新"/>
+</body>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>  
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBKo1IrP-bbpmuNp1ijUDISOqSL11l73pc",
+    authDomain: "fir-sample-52f70.firebaseapp.com",
+    databaseURL: "https://fir-sample-52f70.firebaseio.com",
+    projectId: "fir-sample-52f70",
+    storageBucket: "fir-sample-52f70.appspot.com",
+    messagingSenderId: "515799198333",
+    appId: "1:515799198333:web:cfe31d166ad4e4a7085f14",
+    measurementId: "G-MDRDBRQ5C6"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  
+  var db = firebase.database();
+  var root = db.ref("/");
+  root.on("value", function(snapshot) {
+    $('#valueInput').val(snapshot.val().sampleKey);
+  });
+  $('#updateButton').click(function(){
+    root.set({sampleKey:$('#valueInput').val()});
+  });
+</script>
+</html>
